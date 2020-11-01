@@ -13,15 +13,15 @@ SWEP.ViewModel      = "models/weapons/v_c4.mdl"
 SWEP.WorldModel     = "models/weapons/w_c4.mdl"
 
 SWEP.Primary.ClipSize		= 1
-SWEP.Primary.Delay          = 0.1
+SWEP.Primary.Delay          = 3
 SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "shapedCharge"
 
-SWEP.Secondary.ClipSize = -1 // Size of a clip
-SWEP.Secondary.DefaultClip = -1 // Default number of bullets in a clip
-SWEP.Secondary.Automatic = false // Automatic/Semi Auto
-SWEP.Secondary.Ammo = "none"
+SWEP.Secondary.ClipSize     = -1 // Size of a clip
+SWEP.Secondary.DefaultClip  = -1 // Default number of bullets in a clip
+SWEP.Secondary.Automatic    = false // Automatic/Semi Auto
+SWEP.Secondary.Ammo         = "none"
 
 CreateConVar( "cfc_shaped_charge_chargehealth", 100, FCVAR_REPLICATED, "Health of placed charges.", 0 )
 CreateConVar( "cfc_shaped_charge_maxcharges", 1, FCVAR_REPLICATED, "Maxmium amount of charges active per person at once.", 0 )
@@ -40,7 +40,7 @@ function SWEP:PrimaryAttack()
             return 
         end
         
-        self.Owner:SetAmmo( ammo-1, "shapedCharge")
+        self.Owner:SetAmmo( ammo-1, "shapedCharge" )
         self:SetClip1( 1 )
     end
     
@@ -50,7 +50,7 @@ function SWEP:PrimaryAttack()
 	viewTrace.filter = {self.Owner}
 	local trace = util.TraceLine( viewTrace )
         
-    if trace.HitNonWorld == false or ( self.Owner.plantedCharges or 0 ) >= GetConVar("cfc_shaped_charge_maxcharges"):GetInt() then
+    if trace.HitNonWorld == false or ( self.Owner.plantedCharges or 0 ) >= GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt() then
         self.Owner:EmitSound( "ambient/alarms/warningbell1.wav", 100, 100, 1, CHAN_WEAPON )
         return
     end
@@ -63,12 +63,12 @@ function SWEP:PrimaryAttack()
         bomb:SetParent( trace.Entity )
 		bomb:Spawn()
         
-        -- TESTING --
+        -- TESTING TODO remove after testing phase --
         undo.Create( "brick" )
         undo.AddEntity( bomb )
         undo.SetPlayer( self.Owner )
         undo.Finish()
-        --------------
+        --------------------------
         
         self:TakePrimaryAmmo( 1 )
     end
