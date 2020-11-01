@@ -51,7 +51,7 @@ function SWEP:PrimaryAttack()
 	local trace = util.TraceLine( viewTrace )
         
     if trace.HitNonWorld == false or ( self.Owner.plantedCharges or 0 ) >= GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt() then
-        self.Owner:EmitSound( "ambient/alarms/warningbell1.wav", 100, 100, 1, CHAN_WEAPON )
+            self.Owner:EmitSound( "weapons/c4/c4_plant_quiet.wav", 100, 100, 1, CHAN_WEAPON )
         return
     end
     
@@ -63,7 +63,7 @@ function SWEP:PrimaryAttack()
         bomb:SetParent( trace.Entity )
 		bomb:Spawn()
         
-        -- TESTING TODO remove after testing phase ---
+        -- TESTING TODO remove after testing phase --
         undo.Create( "brick" )
         undo.AddEntity( bomb )
         undo.SetPlayer( self.Owner )

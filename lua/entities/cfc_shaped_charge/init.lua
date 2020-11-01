@@ -38,7 +38,7 @@ function ENT:Initialize()
     local bombLight = ents.Create( "light_dynamic" )
     bombLight:SetPos( self:GetPos() )
     
-    bombLight:SetKeyValue( "_light", 255, 0, 0, 255 )
+    bombLight:SetKeyValue( "_light", 255, 0, 0, 200 )
     bombLight:SetKeyValue( "style", 0 )
     bombLight:SetKeyValue( "distance", 255 )
     bombLight:SetKeyValue( "brightness", 0 )
@@ -47,7 +47,7 @@ function ENT:Initialize()
 
     
     -- TODO change sound V to placing sound
-    self:EmitSound( "npc/turret_floor/click1.wav", 100, 100, 1, CHAN_WEAPON )
+    self:EmitSound( "weapons/c4/c4_initiate.wav", 100, 100, 1, CHAN_WEAPON )
     
     self:SetNWFloat( "bombInitiated", CurTime() )
     self:SetNWFloat( "bombDelay", bombTimer )
@@ -56,9 +56,10 @@ function ENT:Initialize()
         
         if not IsValid(self) then return end
         
-        bombLight:SetKeyValue( "brightness", 5 )
+        bombLight:SetKeyValue( "brightness", 6 )
         timer.Simple(0.5,function()
-            bombLight:SetKeyValue( "brightness", 0 )
+            if not IsValid(self) then return end
+            bombLight:SetKeyValue( "brightness", 3 )
         end)
         
         self:EmitSound( "weapons/c4/c4_beep1.wav", 85, 100, 1, CHAN_STATIC )
