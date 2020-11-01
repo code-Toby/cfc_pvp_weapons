@@ -63,7 +63,7 @@ function SWEP:PrimaryAttack()
         bomb:SetParent( trace.Entity )
 		bomb:Spawn()
         
-        -- TESTING TODO remove after testing phase --
+        -- TESTING TODO remove after testing phase ---
         undo.Create( "brick" )
         undo.AddEntity( bomb )
         undo.SetPlayer( self.Owner )
