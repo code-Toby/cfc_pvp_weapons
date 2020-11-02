@@ -7,7 +7,7 @@ function ENT:Draw()
     self.Entity:DrawShadow( false )
 
 	local FixAngles = self.Entity:GetAngles()
-	local FixRotation = Vector(0, 270, 0)
+	local FixRotation = Vector( 0, 270, 0 )
 
 	FixAngles:RotateAroundAxis(FixAngles:Right(), FixRotation.x)
 	FixAngles:RotateAroundAxis(FixAngles:Up(), FixRotation.y)
