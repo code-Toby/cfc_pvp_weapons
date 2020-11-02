@@ -37,7 +37,7 @@ function SWEP:PrimaryAttack()
         local ammo = self.Owner:GetAmmoCount( "shapedCharge" )
         if ammo == 0 then
             self.Owner:StripWeapon( "cfc_weapon_shaped_charge" )
-            return 
+            return
         end
         
         self.Owner:SetAmmo( ammo-1, "shapedCharge" )

@@ -66,13 +66,13 @@ function ENT:Initialize()
         
         if timer.RepsLeft( "bombAlarm" ) == 0 then
                             
-            local Props = ents.FindAlongRay( self:GetPos(), self:GetPos() + 100 * -self:GetUp() )
+            local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + 100 * -self:GetUp() )
             
-            for _, Prop in pairs(Props) do
-                if IsValid( Prop ) then
+            for _, prop in pairs(props) do
+                if IsValid( prop ) and prop:MapCreationID() == -1 then
                     local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
-                    if shouldDestroy or shouldDestroy == nil then 
-                       Prop:Remove()
+                    if shouldDestroy ~= false then 
+                       prop:Remove()
                     end
                 end
             end
