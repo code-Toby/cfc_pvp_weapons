@@ -2,10 +2,8 @@ include( 'shared.lua' )
  
 language.Add( "cfc_shaped_charge" )
 
-local explodeTime 
-
 function ENT:Initialize()
-    explodeTime = CurTime() + GetConVar( "cfc_shaped_charge_timer" ):GetInt()
+    self.explodeTime = CurTime() + GetConVar( "cfc_shaped_charge_timer" ):GetInt()
 end
 
 function ENT:Draw()
@@ -21,11 +19,10 @@ function ENT:Draw()
 
     local TargetPos = self.Entity:GetPos() + self.Entity:GetUp() * 9
 
-    local timeLeft = math.Clamp( explodeTime - CurTime(), 0, 999999)
+    local timeLeft = math.Clamp( self.explodeTime - CurTime(), 0, 999999)
 
-    local m, s = self:FormatTime( timeLeft )
-    print(timeLeft..""..m.." "..s)
-    self.Text = string.format( "%02d", m ) .. ":" .. string.format( "%02d", s )
+    local minutes, seconds = self:FormatTime( timeLeft )
+    self.Text = string.format( "%02d", minutes ) .. ":" .. string.format( "%02d", seconds )
 
     cam.Start3D2D( TargetPos, FixAngles, 0.10 )
         draw.SimpleText( self.Text, "Trebuchet24", 45, -30, Color(165, 0, 0, 255), 1, 1 )

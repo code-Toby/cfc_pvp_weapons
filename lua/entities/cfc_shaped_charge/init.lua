@@ -1,15 +1,6 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include( 'shared.lua' )
-
-local bombHealth
-local maxBombs
-local bombTimer
-local blastDamage
-local blaseRange
-local explodeTime
-local spawnTime
-local bombLight
  
 function ENT:Initialize()  
 
@@ -17,11 +8,10 @@ function ENT:Initialize()
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges + 1
 
-    bombHealth  = GetConVar( "cfc_shaped_charge_chargehealth" ):GetInt()
-    maxBombs    = GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt()
-    bombTimer   = GetConVar( "cfc_shaped_charge_timer" ):GetInt()
-    blastDamage = GetConVar( "cfc_shaped_charge_blastdamage" ):GetInt()
-    blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
+    self.bombHealth  = GetConVar( "cfc_shaped_charge_chargehealth" ):GetInt()
+    self.bombTimer   = GetConVar( "cfc_shaped_charge_timer" ):GetInt()
+    self.blastDamage = GetConVar( "cfc_shaped_charge_blastdamage" ):GetInt()
+    self.blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
 
     if not IsValid( owner ) then
         self:Remove()
@@ -41,8 +31,7 @@ function ENT:Initialize()
     bombLight:SetParent( self )
     bombLight:Spawn()
 
-    self.bombHealth = bombHealth
-    explodeTime = CurTime() + bombTimer
+    explodeTime = CurTime() + self.bombTimer
 
     self:EmitSound( "weapons/c4/c4_initiate.wav", 100, 100, 1, CHAN_WEAPON )
 
@@ -99,7 +88,7 @@ function ENT:Explode()
         end
     end
     
-    util.BlastDamage( self, self.Owner, self:GetPos(), blastRange, blastDamage )
+    util.BlastDamage( self, self.Owner, self:GetPos(), self.blastRange, self.blastDamage )
     
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
@@ -121,7 +110,7 @@ end
 
 function ENT:bombVisualsTimer()
     local timePassed = CurTime() - spawnTime
-    local timerDelay = math.Clamp( bombTimer / timePassed - 1, 0.13, 1 )
+    local timerDelay = math.Clamp( self.bombTimer / timePassed - 1, 0.13, 1 )
     
     timer.Simple( timerDelay, function()
         if not IsValid( self ) then return end
