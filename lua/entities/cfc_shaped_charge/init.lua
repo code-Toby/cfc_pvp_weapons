@@ -101,6 +101,7 @@ function ENT:soundLight()
     bombLight:SetKeyValue( "brightness", 2 )
     timer.Simple(0.2,function()
         if not IsValid(self) then return end
+        
         bombLight:SetKeyValue( "brightness", 0 )
     end)
     
