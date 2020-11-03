@@ -1,5 +1,5 @@
-AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
-AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
+AddCSLuaFile( "cl_init.lua" )
+AddCSLuaFile( "shared.lua" )
 include( 'shared.lua' )
 
 local bombHealth

@@ -18,9 +18,9 @@ SWEP.Primary.DefaultClip	= 1
 SWEP.Primary.Automatic		= false
 SWEP.Primary.Ammo		    = "shapedCharge"
 
-SWEP.Secondary.ClipSize     = -1 // Size of a clip
-SWEP.Secondary.DefaultClip  = -1 // Default number of bullets in a clip
-SWEP.Secondary.Automatic    = false // Automatic/Semi Auto
+SWEP.Secondary.ClipSize     = -1
+SWEP.Secondary.DefaultClip  = -1
+SWEP.Secondary.Automatic    = false
 SWEP.Secondary.Ammo         = "none"
 
 CreateConVar( "cfc_shaped_charge_chargehealth", 100, FCVAR_REPLICATED, "Health of placed charges.", 0 )
