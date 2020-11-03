@@ -35,6 +35,7 @@ function SWEP:PrimaryAttack()
     
     if self:CanPrimaryAttack() == false then
         local ammo = self.Owner:GetAmmoCount( "shapedCharge" )
+        
         if ammo == 0 then
             self.Owner:StripWeapon( "cfc_weapon_shaped_charge" )
             return
@@ -50,8 +51,12 @@ function SWEP:PrimaryAttack()
 	viewTrace.filter = {self.Owner}
 	local trace = util.TraceLine( viewTrace )
         
-    if trace.HitNonWorld == false or ( self.Owner.plantedCharges or 0 ) >= GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt() then
-            self.Owner:EmitSound( "weapons/c4/c4_plant_quiet.wav", 100, 100, 1, CHAN_WEAPON )
+    local hitWorld = trace.HitNonWorld == false
+    local maxCharges = GetConVar( "cfc_shaped_charges_maxcharges" ):GetInt()
+    local hasMaxCharges = ( self.Owner.plantedCharges or 0 ) >= maxCharges
+    
+    if hitWorld or hasMaxCharges then
+        self.Owner:EmitSound( "weapons/c4/c4_plant_quiet.wav", 100, 100, 1, CHAN_WEAPON )
         return
     end
     
