@@ -47,7 +47,6 @@ function ENT:Initialize()
     self:EmitSound( "weapons/c4/c4_initiate.wav", 100, 100, 1, CHAN_WEAPON )
 
     self:SetNWFloat( "bombInitiated", CurTime() )
-    self:SetNWFloat( "bombDelay", bombTimer )
     
     spawnTime = CurTime()
     self:bombVisualsTimer()
