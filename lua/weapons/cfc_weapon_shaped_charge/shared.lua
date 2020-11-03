@@ -28,6 +28,7 @@ CreateConVar( "cfc_shaped_charge_maxcharges", 1, FCVAR_REPLICATED, "Maxmium amou
 CreateConVar( "cfc_shaped_charge_timer", 10, FCVAR_REPLICATED, "The time it takes for a charges to detonate.", 0 )
 CreateConVar( "cfc_shaped_charge_blastdamage", 0, FCVAR_REPLICATED, "The damage the explosive does to players when it explodes.", 0 )
 CreateConVar( "cfc_shaped_charge_blastrange", 100, FCVAR_REPLICATED, "The damage range the explosion has.", 0 )
+CreateConVar( "cfc_shaped_charge_tracerange", 100, FCVAR_REPLICATED, "The range the prop breaking explosion has.", 0 )
 
 function SWEP:PrimaryAttack()
 
@@ -52,7 +53,7 @@ function SWEP:PrimaryAttack()
 	local trace = util.TraceLine( viewTrace )
         
     local hitWorld = trace.HitNonWorld == false
-    local maxCharges = GetConVar( "cfc_shaped_charges_maxcharges" ):GetInt()
+    local maxCharges = GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt()
     local hasMaxCharges = ( self.Owner.plantedCharges or 0 ) >= maxCharges
     
     if hitWorld or hasMaxCharges then
@@ -75,13 +76,6 @@ function SWEP:PrimaryAttack()
 		bomb.Owner = self.Owner
         bomb:SetParent( trace.Entity )
 		bomb:Spawn()
-        
-        -- TESTING TODO remove after testing phase --
-        undo.Create( "brick" )
-        undo.AddEntity( bomb )
-        undo.SetPlayer( self.Owner )
-        undo.Finish()
-        --------------------------
         
         self:TakePrimaryAmmo( 1 )
     end

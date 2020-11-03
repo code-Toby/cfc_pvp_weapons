@@ -12,6 +12,7 @@ function ENT:Initialize()
     self.bombTimer   = GetConVar( "cfc_shaped_charge_timer" ):GetInt()
     self.blastDamage = GetConVar( "cfc_shaped_charge_blastdamage" ):GetInt()
     self.blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
+    self.traceRange  = GetConVar( "cfc_shaped_charge_tracerange" ):GetInt()
 
     if not IsValid( owner ) then
         self:Remove()
@@ -77,11 +78,12 @@ function ENT:Think()
 end
 
 function ENT:Explode()
-    local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + 100 * -self:GetUp() )
+    local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + self.traceRange * -self:GetUp() )
     
     for _, prop in pairs( props ) do
         if IsValid( prop ) and prop:MapCreationID() == -1 then
             local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
+            
             if shouldDestroy ~= false then 
                 prop:Remove()
             end
