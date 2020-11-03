@@ -1,11 +1,11 @@
-include('shared.lua')
+include( 'shared.lua' )
  
-language.Add("cfc_shaped_charge")
+language.Add( "cfc_shaped_charge" )
 
 local explodeTime 
 
 function ENT:Initialize()
-    explodeTime = CurTime() + GetConVar("cfc_shaped_charge_timer"):GetInt()
+    explodeTime = CurTime() + GetConVar( "cfc_shaped_charge_timer" ):GetInt()
 end
 
 function ENT:Draw()
@@ -32,10 +32,10 @@ function ENT:Draw()
 	cam.End3D2D()
 end
 
-function ENT:FormatTime(seconds)
+function ENT:FormatTime( seconds )
 
 	local m = seconds % 604800 % 86400 % 3600 / 60
 	local s = seconds % 604800 % 86400 % 3600 % 60
 
-	return math.floor(m), math.floor(s)
+	return math.floor( m ), math.floor( s )
 end

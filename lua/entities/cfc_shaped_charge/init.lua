@@ -1,6 +1,6 @@
 AddCSLuaFile( "cl_init.lua" ) -- Make sure clientside
 AddCSLuaFile( "shared.lua" )  -- and shared scripts are sent.
-include('shared.lua')
+include( 'shared.lua' )
 
 local bombHealth
 local maxBombs
@@ -17,11 +17,11 @@ function ENT:Initialize()
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges + 1
 
-    bombHealth = GetConVar("cfc_shaped_charge_chargehealth"):GetInt()
-    maxBombs   = GetConVar("cfc_shaped_charge_maxcharges"):GetInt()
-    bombTimer  = GetConVar("cfc_shaped_charge_timer"):GetInt()
-    blastDamage  = GetConVar("cfc_shaped_charge_blastdamage"):GetInt()
-    blastRange  = GetConVar("cfc_shaped_charge_blastrange"):GetInt()
+    bombHealth  = GetConVar( "cfc_shaped_charge_chargehealth" ):GetInt()
+    maxBombs    = GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt()
+    bombTimer   = GetConVar( "cfc_shaped_charge_timer" ):GetInt()
+    blastDamage = GetConVar( "cfc_shaped_charge_blastdamage" ):GetInt()
+    blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
         
     if not IsValid( owner ) then
 		self:Remove()
@@ -56,7 +56,7 @@ function ENT:OnTakeDamage ( dmg )
     self.bombHealth = ( self.bombHealth ) - dmg:GetDamage()
     if self.bombHealth <= 0 then
     
-            if not IsValid(self) then return end
+            if not IsValid( self ) then return end
     
             local effectdata = EffectData()
                 effectdata:SetOrigin( self:GetPos() )
@@ -124,8 +124,8 @@ function ENT:bombVisualsTimer()
     local timerDelay = math.Clamp( bombTimer / timePassed - 1, 0.13, 1 )
     
     timer.Simple( timerDelay, function()
-        if not IsValid(self) then return end
-        if not IsValid(self.Entity) then return end
+        if not IsValid( self ) then return end
+        if not IsValid( self.Entity ) then return end
         self:soundLight() 
     end)
 end
