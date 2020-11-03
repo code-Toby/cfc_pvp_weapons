@@ -22,16 +22,16 @@ function ENT:Initialize()
     bombTimer   = GetConVar( "cfc_shaped_charge_timer" ):GetInt()
     blastDamage = GetConVar( "cfc_shaped_charge_blastdamage" ):GetInt()
     blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
-        
+
     if not IsValid( owner ) then
-		self:Remove()
-		return
-	end
-    
-	self:SetModel( "models/weapons/w_c4_planted.mdl" )
-	self:SetSolid( SOLID_VPHYSICS )
+        self:Remove()
+        return
+    end
+
+    self:SetModel( "models/weapons/w_c4_planted.mdl" )
+    self:SetSolid( SOLID_VPHYSICS )
     self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
-    
+
     bombLight = ents.Create( "light_dynamic" )
     bombLight:SetPos( self:GetPos() )
     bombLight:SetKeyValue( "_light", 255, 0, 0, 200 )
@@ -40,14 +40,14 @@ function ENT:Initialize()
     bombLight:SetKeyValue( "brightness", 0 )
     bombLight:SetParent( self )
     bombLight:Spawn()
-    
+
     self.bombHealth = bombHealth
     explodeTime = CurTime() + bombTimer
-    
+
     self:EmitSound( "weapons/c4/c4_initiate.wav", 100, 100, 1, CHAN_WEAPON )
 
     self:SetNWFloat( "bombInitiated", CurTime() )
-    
+
     spawnTime = CurTime()
     self:bombVisualsTimer()
 end
@@ -55,18 +55,18 @@ end
 function ENT:OnTakeDamage ( dmg )
     self.bombHealth = ( self.bombHealth ) - dmg:GetDamage()
     if self.bombHealth <= 0 then
-    
-            if not IsValid( self ) then return end
-    
-            local effectdata = EffectData()
-                effectdata:SetOrigin( self:GetPos() )
-                effectdata:SetMagnitude( 8 )
-                effectdata:SetScale( 1 )
-                effectdata:SetRadius( 16 )
-                
-            util.Effect( "Sparks", effectdata )
+
+        if not IsValid( self ) then return end
+
+        local effectdata = EffectData()
+            effectdata:SetOrigin( self:GetPos() )
+            effectdata:SetMagnitude( 8 )
+            effectdata:SetScale( 1 )
+            effectdata:SetRadius( 16 )
             
-            self:Remove()
+        util.Effect( "Sparks", effectdata )
+
+        self:Remove()
     end
 end
 
@@ -81,7 +81,7 @@ end
 
 function ENT:Think()
     if not IsValid( self ) then return end
-    
+
     if explodeTime <= CurTime() then
         self:Explode()
     end
@@ -94,7 +94,7 @@ function ENT:Explode()
         if IsValid( prop ) and prop:MapCreationID() == -1 then
             local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
             if shouldDestroy ~= false then 
-               prop:Remove()
+                prop:Remove()
             end
         end
     end
