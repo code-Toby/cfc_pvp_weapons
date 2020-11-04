@@ -57,7 +57,7 @@ function SWEP:PrimaryAttack()
     local hasMaxCharges = ( self.Owner.plantedCharges or 0 ) >= maxCharges
     
     if hitWorld or hasMaxCharges then
-        self.Owner:EmitSound( "weapons/c4/c4_plant_quiet.wav", 100, 100, 1, CHAN_WEAPON )
+        self.Owner:EmitSound( "common/wpn_denyselect.wav", 100, 100, 1, CHAN_WEAPON )
         return
     end
     
@@ -83,4 +83,8 @@ function SWEP:PrimaryAttack()
     if self.Owner:GetAmmoCount( "shapedCharge" ) <= 0 then
         self.Owner:StripWeapon( "cfc_weapon_shaped_charge" )
     end
+end
+
+function SWEP:SecondaryAttack()
+    return
 end

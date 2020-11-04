@@ -28,7 +28,7 @@ function ENT:Initialize()
 
     explodeTime = CurTime() + self.bombTimer
 
-    self:EmitSound( "weapons/c4/c4_initiate.wav", 100, 100, 1, CHAN_WEAPON )
+    self:EmitSound( "weapons/c4/c4_plant.wav", 100, 100, 1, CHAN_WEAPON )
 
     self:SetNWFloat( "bombInitiated", CurTime() )
 
