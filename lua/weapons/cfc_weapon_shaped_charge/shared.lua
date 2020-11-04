@@ -86,5 +86,6 @@ function SWEP:PrimaryAttack()
 end
 
 function SWEP:SecondaryAttack()
-    return
+    self:PrimaryAttack()
+    self:SetNextSecondaryFire( CurTime() + self.Primary.Delay )
 end

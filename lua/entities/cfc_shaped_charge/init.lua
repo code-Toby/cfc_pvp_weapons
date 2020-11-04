@@ -135,7 +135,7 @@ end
 
 function ENT:CreateLight()
     self.bombLight = ents.Create( "light_dynamic" )
-    self.bombLight:SetPos( self:GetPos() )
+    self.bombLight:SetPos( self:GetPos() + self:GetUp() * 10 )
     self.bombLight:SetKeyValue( "_light", 255, 0, 0, 200 )
     self.bombLight:SetKeyValue( "style", 0 )
     self.bombLight:SetKeyValue( "distance", 255 )
