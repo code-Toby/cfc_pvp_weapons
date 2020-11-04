@@ -20,17 +20,11 @@ function ENT:Initialize()
     end
 
     self:SetModel( "models/weapons/w_c4_planted.mdl" )
+    self.Entity:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
     self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
 
-    bombLight = ents.Create( "light_dynamic" )
-    bombLight:SetPos( self:GetPos() )
-    bombLight:SetKeyValue( "_light", 255, 0, 0, 200 )
-    bombLight:SetKeyValue( "style", 0 )
-    bombLight:SetKeyValue( "distance", 255 )
-    bombLight:SetKeyValue( "brightness", 0 )
-    bombLight:SetParent( self )
-    bombLight:Spawn()
+    self:CreateLight()
 
     explodeTime = CurTime() + self.bombTimer
 
@@ -81,12 +75,8 @@ function ENT:Explode()
     local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + self.traceRange * -self:GetUp() )
     
     for _, prop in pairs( props ) do
-        if IsValid( prop ) and prop:MapCreationID() == -1 then
-            local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
-            
-            if shouldDestroy ~= false then 
-                prop:Remove()
-            end
+        if self:CanDestroyProp( prop ) then
+            prop:Remove()
         end
     end
     
@@ -99,12 +89,12 @@ function ENT:Explode()
     self:Remove()
 end
 
-function ENT:soundLight()
-    bombLight:SetKeyValue( "brightness", 2 )
+function ENT:RunCountdownEffects()
+    self.bombLight:SetKeyValue( "brightness", 2 )
     timer.Simple(0.2,function()
         if not IsValid(self) then return end
         
-        bombLight:SetKeyValue( "brightness", 0 )
+        self.bombLight:SetKeyValue( "brightness", 0 )
     end)
     
     self:EmitSound( "weapons/c4/c4_beep1.wav", 85, 100, 1, CHAN_STATIC )
@@ -118,6 +108,28 @@ function ENT:bombVisualsTimer()
     timer.Simple( timerDelay, function()
         if not IsValid( self ) then return end
         if not IsValid( self.Entity ) then return end
-        self:soundLight() 
+        self:RunCountdownEffects() 
     end)
+end
+
+function ENT:CreateLight()
+    self.bombLight = ents.Create( "light_dynamic" )
+    self.bombLight:SetPos( self:GetPos() )
+    self.bombLight:SetKeyValue( "_light", 255, 0, 0, 200 )
+    self.bombLight:SetKeyValue( "style", 0 )
+    self.bombLight:SetKeyValue( "distance", 255 )
+    self.bombLight:SetKeyValue( "brightness", 0 )
+    self.bombLight:SetParent( self )
+    self.bombLight:Spawn()
+end
+
+function ENT:CanDestroyProp(prop)
+    if IsValid( prop ) and prop:MapCreationID() == -1 then
+        local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
+        
+        if shouldDestroy ~= false then 
+            return true
+        end
+    end
+    return false
 end
