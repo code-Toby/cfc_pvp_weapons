@@ -91,8 +91,8 @@ end
 
 function ENT:RunCountdownEffects()
     self.bombLight:SetKeyValue( "brightness", 2 )
-    timer.Simple(0.2,function()
-        if not IsValid(self) then return end
+    timer.Simple( 0.2, function()
+        if not IsValid( self ) then return end
         
         self.bombLight:SetKeyValue( "brightness", 0 )
     end)
@@ -123,7 +123,7 @@ function ENT:CreateLight()
     self.bombLight:Spawn()
 end
 
-function ENT:CanDestroyProp(prop)
+function ENT:CanDestroyProp( prop )
     if IsValid( prop ) and prop:MapCreationID() == -1 then
         local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
         
