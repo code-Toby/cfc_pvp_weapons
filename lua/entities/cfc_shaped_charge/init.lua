@@ -28,7 +28,8 @@ function ENT:Initialize()
 
     explodeTime = CurTime() + self.bombTimer
 
-    self:EmitSound( "weapons/c4/c4_plant.wav", 100, 100, 1, CHAN_WEAPON )
+    self:EmitSound( "items/ammocrate_close.wav", 100, 100, 1, CHAN_STATIC )
+    self:EmitSound( "npc/roller/blade_cut.wav", 100, 100, 1, CHAN_STATIC )
 
     self:SetNWFloat( "bombInitiated", CurTime() )
 
@@ -43,15 +44,28 @@ function ENT:OnTakeDamage ( dmg )
         if not IsValid( self ) then return end
 
         local effectdata = EffectData()
-            effectdata:SetOrigin( self:GetPos() )
-            effectdata:SetMagnitude( 8 )
-            effectdata:SetScale( 1 )
-            effectdata:SetRadius( 16 )
+        effectdata:SetOrigin( self:GetPos() )
+        effectdata:SetMagnitude( 8 )
+        effectdata:SetScale( 1 )
+        effectdata:SetRadius( 16 )
             
         util.Effect( "Sparks", effectdata )
+        
+        self:EmitSound( "npc/manhack/bat_away.wav", 100, 100, 1, CHAN_STATIC )
+        self:EmitSound( "npc/roller/mine/rmine_taunt1.wav", 100, 100, 1, CHAN_STATIC )
 
         self:Remove()
     end
+    local effectdata = EffectData()
+    effectdata:SetOrigin( self:GetPos() )
+    effectdata:SetScale( 0.5 )
+    effectdata:SetMagnitude( 1 )
+        
+    util.Effect( "Sparks", effectdata )
+    
+    self:EmitSound( "Plastic_Box.Break", 100, 100, 1, CHAN_WEAPON )
+    self:EmitSound( "npc/roller/code2.wav", 100, 100, 1, CHAN_WEAPON )
+    
 end
 
 function ENT:OnRemove()
@@ -84,7 +98,14 @@ function ENT:Explode()
     
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
+    effectdata:SetNormal( self:GetUp() )
+    util.Effect( "AR2Explosion", effectdata )
+    
+    effectdata:SetOrigin( self:GetPos() )
     util.Effect( "Explosion", effectdata )
+    
+    self:EmitSound( "npc/strider/strider_step4.wav", 100, 100, 1, CHAN_STATIC )
+    self:EmitSound( "weapons/mortar/mortar_explode2.wav", 500, 100, 1, CHAN_WEAPON )
         
     self:Remove()
 end

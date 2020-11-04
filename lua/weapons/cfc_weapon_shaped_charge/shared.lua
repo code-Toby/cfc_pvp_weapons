@@ -1,6 +1,6 @@
 SWEP.Author			= "Redox"
 SWEP.Contact		= ""
-SWEP.Instructions	= "Left click while looking at a prop to spawn a shaped explosive"
+SWEP.Instructions	= ("Right click to select delay".."\n".."Left click to plant.") 
 
 game.AddAmmoType( {
 	name = "shapedCharge",
