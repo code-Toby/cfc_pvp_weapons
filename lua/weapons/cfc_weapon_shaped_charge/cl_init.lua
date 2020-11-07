@@ -10,3 +10,11 @@ SWEP.SlotPos        = 1
 
 SWEP.DrawCrosshair  = true
 SWEP.DrawAmmo       = true
+
+function SWEP:PrimaryAttack()
+    return
+end
+
+function SWEP:SecondaryAttack()
+    return
+end

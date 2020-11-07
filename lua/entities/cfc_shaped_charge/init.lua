@@ -52,7 +52,7 @@ function ENT:OnTakeDamage ( dmg )
         util.Effect( "Sparks", effectdata )
         
         self:EmitSound( "npc/manhack/bat_away.wav", 100, 100, 1, CHAN_STATIC )
-        self:EmitSound( "npc/roller/mine/rmine_taunt1.wav", 100, 100, 1, CHAN_STATIC )
+        self:EmitSound( "doors/vent_open1.wav", 100, 100, 1, CHAN_STATIC )
 
         self:Remove()
     end
@@ -98,7 +98,7 @@ function ENT:Explode()
     
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
-    effectdata:SetNormal( self:GetUp() )
+    effectdata:SetNormal( -self:GetUp() )
     util.Effect( "AR2Explosion", effectdata )
     
     effectdata:SetOrigin( self:GetPos() )
