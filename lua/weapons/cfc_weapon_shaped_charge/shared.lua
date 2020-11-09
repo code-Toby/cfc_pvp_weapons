@@ -1,5 +1,5 @@
 SWEP.Author			= "Redox"
-SWEP.Contact		= ""
+SWEP.Contact		= "CFC Discord"
 SWEP.Instructions	= ("Right or left click to plant.") 
 
 game.AddAmmoType( {
