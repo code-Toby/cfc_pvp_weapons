@@ -1,6 +1,6 @@
 SWEP.Author			= "Redox"
 SWEP.Contact		= ""
-SWEP.Instructions	= ("Right click to select delay".."\n".."Left click to plant.") 
+SWEP.Instructions	= ("Right or left click to plant.") 
 
 game.AddAmmoType( {
 	name = "shapedCharge",
