@@ -3,8 +3,8 @@ SWEP.Contact		= "CFC Discord"
 SWEP.Instructions	= "Right or left click to plant."
 
 game.AddAmmoType( {
-	name = "shapedCharge",
-	dmgtype = DMG_BULLET
+    name = "shapedCharge",
+    dmgtype = DMG_BULLET
 } )
 
 SWEP.Spawnable      = true
