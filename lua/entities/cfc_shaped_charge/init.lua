@@ -6,6 +6,11 @@ function ENT:Initialize()
 
     local owner = self:GetOwner()
 
+    if not IsValid( owner ) then
+        self:Remove()
+        return
+    end
+
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges + 1
 
@@ -15,15 +20,13 @@ function ENT:Initialize()
     self.blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
     self.traceRange  = GetConVar( "cfc_shaped_charge_tracerange" ):GetInt()
 
-    if not IsValid( owner ) then
-        self:Remove()
-        return
-    end
-
     self:SetModel( "models/weapons/w_c4_planted.mdl" )
     self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
+    self:DrawShadow(false)
     self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
+
+    self:PhysWake()
 
     self:CreateLight()
 
