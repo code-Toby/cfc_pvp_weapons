@@ -1,4 +1,4 @@
-include( 'shared.lua' )
+include( "shared.lua" )
  
 language.Add( "cfc_shaped_charge" )
 
@@ -7,17 +7,17 @@ function ENT:Initialize()
 end
 
 function ENT:Draw()
-    self.Entity:DrawModel()
-    self.Entity:DrawShadow( false )
+    self:DrawModel()
+    self:DrawShadow( false )
 
-    local FixAngles = self.Entity:GetAngles()
+    local FixAngles = self:GetAngles()
     local FixRotation = Vector( 0, 270, 0 )
 
     FixAngles:RotateAroundAxis(FixAngles:Right(), FixRotation.x)
     FixAngles:RotateAroundAxis(FixAngles:Up(), FixRotation.y)
     FixAngles:RotateAroundAxis(FixAngles:Forward(), FixRotation.z)
 
-    local TargetPos = self.Entity:GetPos() + self.Entity:GetUp() * 9
+    local TargetPos = self:GetPos() + self:GetUp() * 9
 
     local timeLeft = math.Clamp( self.explodeTime - CurTime(), 0, 999999)
 

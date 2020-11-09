@@ -1,10 +1,10 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
-include( 'shared.lua' )
+include( "shared.lua" )
  
 function ENT:Initialize()  
 
-    local owner = self.Owner
+    local owner = self:GetOwner()
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges + 1
 
@@ -20,7 +20,7 @@ function ENT:Initialize()
     end
 
     self:SetModel( "models/weapons/w_c4_planted.mdl" )
-    self.Entity:PhysicsInit( SOLID_VPHYSICS )
+    self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
     self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
 
@@ -38,7 +38,7 @@ function ENT:Initialize()
 end
 
 function ENT:OnTakeDamage ( dmg )
-    self.bombHealth = ( self.bombHealth ) - dmg:GetDamage()
+    self.bombHealth = self.bombHealth - dmg:GetDamage()
     if self.bombHealth <= 0 then
 
         if not IsValid( self ) then return end
@@ -69,7 +69,7 @@ function ENT:OnTakeDamage ( dmg )
 end
 
 function ENT:OnRemove()
-    local owner = self.Owner
+    local owner = self:GetOwner()
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges - 1
     if owner.plantedCharges <= 0 then
@@ -94,11 +94,11 @@ function ENT:Explode()
         end
     end
     
-    util.BlastDamage( self, self.Owner, self:GetPos(), self.blastRange, self.blastDamage )
+    util.BlastDamage( self, self:GetOwner(), self:GetPos(), self.blastRange, self.blastDamage )
     
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
-    effectdata:SetNormal( -self:GetUp() )
+    effectdata:SetNormal( -self:GetUp())
     util.Effect( "AR2Explosion", effectdata )
     
     effectdata:SetOrigin( self:GetPos() )
@@ -128,7 +128,6 @@ function ENT:bombVisualsTimer()
     
     timer.Simple( timerDelay, function()
         if not IsValid( self ) then return end
-        if not IsValid( self.Entity ) then return end
         self:RunCountdownEffects() 
     end)
 end
