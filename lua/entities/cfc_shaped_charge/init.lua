@@ -100,9 +100,9 @@ function ENT:Explode()
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
     effectdata:SetNormal( -self:GetUp())
+    effectdata:SetRadius( 3 )
+
     util.Effect( "AR2Explosion", effectdata )
-    
-    effectdata:SetOrigin( self:GetPos() )
     util.Effect( "Explosion", effectdata )
     
     self:EmitSound( "npc/strider/strider_step4.wav", 100, 100, 1, CHAN_STATIC )
