@@ -23,7 +23,7 @@ function ENT:Initialize()
     self:SetModel( "models/weapons/w_c4_planted.mdl" )
     self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
-    self:DrawShadow(false)
+    self:DrawShadow( false )
     self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
 
     self:PhysWake()
