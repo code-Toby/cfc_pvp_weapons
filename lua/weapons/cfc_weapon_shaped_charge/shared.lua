@@ -1,6 +1,6 @@
 SWEP.Author			= "Redox"
 SWEP.Contact		= "CFC Discord"
-SWEP.Instructions	= ("Right or left click to plant.") 
+SWEP.Instructions	= "Right or left click to plant."
 
 game.AddAmmoType( {
 	name = "shapedCharge",
