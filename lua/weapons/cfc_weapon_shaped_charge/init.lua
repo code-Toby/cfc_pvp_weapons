@@ -48,7 +48,7 @@ function SWEP:PrimaryAttack()
         FixAngles:RotateAroundAxis(FixAngles:Forward(), FixRotation.z)
         
         bomb:SetAngles( FixAngles )
-		bomb.Owner = self:GetOwner()
+		bomb:SetOwner( self:GetOwner() )
         bomb:SetParent( trace.Entity )
 		bomb:Spawn()
         

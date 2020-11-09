@@ -5,6 +5,7 @@ include( "shared.lua" )
 function ENT:Initialize()  
 
     local owner = self:GetOwner()
+
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges + 1
 
