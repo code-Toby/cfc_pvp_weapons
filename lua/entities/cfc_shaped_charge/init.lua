@@ -156,7 +156,7 @@ end
 function ENT:CanDestroyProp( prop )
     if not IsValid( prop ) or not IsValid( prop:GetOwner() ) then return false end
     
-    local shouldDestroy = hook.Run( "CFC_SWEP_ShapedCharge_CanDestroyQuery", prop )
+    local shouldDestroy = hook.Run( "CFC_SWEP_ShapedCharge_CanDestroyQuery", self, prop )
     
     if shouldDestroy ~= false then return true end
     
