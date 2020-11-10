@@ -74,6 +74,12 @@ end
 
 function ENT:OnRemove()
     local owner = self.bombOwner
+    
+    if not IsValid( owner ) then
+        self:Remove()
+        return
+    end
+    
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges - 1
     if owner.plantedCharges <= 0 then
