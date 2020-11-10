@@ -154,7 +154,7 @@ function ENT:CreateLight()
 end
 
 function ENT:CanDestroyProp( prop )
-    if IsValid( prop ) and prop:MapCreationID() == -1 then
+    if IsValid( prop ) and prop:GetOwner() ~= NULL then
         local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
         
         if shouldDestroy ~= false then 
