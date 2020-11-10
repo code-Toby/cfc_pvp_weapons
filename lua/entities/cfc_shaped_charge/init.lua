@@ -24,7 +24,7 @@ function ENT:Initialize()
     self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
     self:DrawShadow( false )
-    self:SetCollisionGroup( COLLISION_GROUP_DEBRIS_TRIGGER )
+    self:SetCollisionGroup( COLLISION_GROUP_WEAPON )
 
     self:PhysWake()
 
