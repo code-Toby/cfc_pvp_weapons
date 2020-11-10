@@ -20,7 +20,7 @@ function ENT:Initialize()
     self.blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
     self.traceRange  = GetConVar( "cfc_shaped_charge_tracerange" ):GetInt()
 
-    self:SetModel( "models/weapons/w_c4_planted.mdl" )
+    self:SetModel( "models/hunter/plates/plate025x05.mdl" )
     self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
     self:DrawShadow( false )
