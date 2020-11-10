@@ -1,8 +1,6 @@
 AddCSLuaFile( "cl_init.lua" )
 AddCSLuaFile( "shared.lua" )
 include( "shared.lua" )
-
-local explodeTime
  
 function ENT:Initialize()  
 
@@ -32,7 +30,7 @@ function ENT:Initialize()
 
     self:CreateLight()
 
-    explodeTime = CurTime() + self.bombTimer
+    self.explodeTime = CurTime() + self.bombTimer
 
     self:EmitSound( "items/ammocrate_close.wav", 100, 100, 1, CHAN_STATIC )
     self:EmitSound( "npc/roller/blade_cut.wav", 100, 100, 1, CHAN_STATIC )
@@ -92,7 +90,7 @@ end
 function ENT:Think()
     if not IsValid( self ) then return end
 
-    if explodeTime <= CurTime() then
+    if self.explodeTime <= CurTime() then
         self:Explode()
     end
 end
