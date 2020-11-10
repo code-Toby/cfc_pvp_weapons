@@ -4,7 +4,7 @@ include( "shared.lua" )
  
 function ENT:Initialize()  
 
-    local owner = self:GetOwner()
+    local owner = self.bombOwner
 
     if not IsValid( owner ) then
         self:Remove()
@@ -73,7 +73,7 @@ function ENT:OnTakeDamage ( dmg )
 end
 
 function ENT:OnRemove()
-    local owner = self:GetOwner()
+    local owner = self.bombOwner
     owner.plantedCharges = owner.plantedCharges or 0
     owner.plantedCharges = owner.plantedCharges - 1
     if owner.plantedCharges <= 0 then
@@ -98,7 +98,7 @@ function ENT:Explode()
         end
     end
     
-    util.BlastDamage( self, self:GetOwner(), self:GetPos(), self.blastRange, self.blastDamage )
+    util.BlastDamage( self, self.bombOwner, self:GetPos(), self.blastRange, self.blastDamage )
     
     local effectdata = EffectData()
     effectdata:SetOrigin( self:GetPos() )
