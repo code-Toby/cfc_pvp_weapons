@@ -20,7 +20,7 @@ function ENT:Initialize()
     self.blastRange  = GetConVar( "cfc_shaped_charge_blastrange" ):GetInt()
     self.traceRange  = GetConVar( "cfc_shaped_charge_tracerange" ):GetInt()
 
-    self:SetModel( "models/hunter/plates/plate025x05.mdl" )
+    self:SetModel( "models/weapons/w_c4_planted.mdl" )
     self:PhysicsInit( SOLID_VPHYSICS )
     self:SetSolid( SOLID_VPHYSICS )
     self:DrawShadow( false )
@@ -99,10 +99,8 @@ function ENT:Explode()
     local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + self.traceRange * -self:GetUp() )
     
     for _, prop in pairs( props ) do
-        self:SetColor( Color( 255, 0, 0, 255 ) )
         if self:CanDestroyProp( prop ) then
             prop:Remove()
-            self:SetColor( Color( 0, 255, 0, 255 ) )
         end
     end
     
@@ -156,8 +154,8 @@ function ENT:CreateLight()
 end
 
 function ENT:CanDestroyProp( prop )
-    --if not IsValid( prop ) or not IsValid( prop:GetOwner() ) then return false end
-    return true
+    if not IsValid( prop ) or not IsValid( prop:GetOwner() ) then return false end
+    
     local shouldDestroy = hook.Run( "CFC_SWEP_ShapedCharge_CanDestroyQuery", self, prop )
     
     if shouldDestroy ~= false then return true end
