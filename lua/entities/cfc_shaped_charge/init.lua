@@ -154,12 +154,11 @@ function ENT:CreateLight()
 end
 
 function ENT:CanDestroyProp( prop )
-    if IsValid( prop ) and prop:GetOwner() ~= nil then
-        local shouldDestroy = hook.Call( "CFC_SWEP_Shaped_Charge", entityToDestroy )
-        
-        if shouldDestroy ~= false then 
-            return true
-        end
-    end
+    if not IsValid( prop ) or not prop:GetOwner() then return false end
+    
+    local shouldDestroy = hook.Call( "CFC_SWEP_ShapedCharge_CanDestroyQuery", entityToDestroy )
+    
+    if shouldDestroy ~= false then return true end
+    
     return false
 end
