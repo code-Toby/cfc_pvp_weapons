@@ -154,12 +154,11 @@ function ENT:CreateLight()
 end
 
 function ENT:CanDestroyProp( prop )
-    print(prop:GetOwner())
-    if not IsValid( prop ) or not IsValid ( prop:CPPIGetOwner() ) then return false end
-
+    if not IsValid( prop ) or not IsValid( prop:CPPIGetOwner() ) then return false end
+    
     local shouldDestroy = hook.Run( "CFC_SWEP_ShapedCharge_CanDestroyQuery", self, prop )
-        
-    if shouldDestroy ~= false then 
-        return true
-    end
+    
+    if shouldDestroy ~= false then return true end
+    
+    return false
 end
