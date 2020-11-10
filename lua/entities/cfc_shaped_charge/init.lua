@@ -99,8 +99,10 @@ function ENT:Explode()
     local props = ents.FindAlongRay( self:GetPos(), self:GetPos() + self.traceRange * -self:GetUp() )
     
     for _, prop in pairs( props ) do
+        self:SetColor( Color( 255, 0, 0, 255 ) )
         if self:CanDestroyProp( prop ) then
             prop:Remove()
+            self:SetColor( Color( 0, 255, 0, 255 ) )
         end
     end
     
@@ -117,7 +119,7 @@ function ENT:Explode()
     self:EmitSound( "npc/strider/strider_step4.wav", 100, 100, 1, CHAN_STATIC )
     self:EmitSound( "weapons/mortar/mortar_explode2.wav", 500, 100, 1, CHAN_WEAPON )
         
-    self:Remove()
+    --self:Remove()
 end
 
 function ENT:RunCountdownEffects()
