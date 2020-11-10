@@ -117,7 +117,7 @@ function ENT:Explode()
     self:EmitSound( "npc/strider/strider_step4.wav", 100, 100, 1, CHAN_STATIC )
     self:EmitSound( "weapons/mortar/mortar_explode2.wav", 500, 100, 1, CHAN_WEAPON )
         
-    --self:Remove()
+    self:Remove()
 end
 
 function ENT:RunCountdownEffects()
