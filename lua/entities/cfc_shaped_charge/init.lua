@@ -152,7 +152,9 @@ function ENT:CreateLight()
 end
 
 function ENT:CanDestroyProp( prop )
-    if not IsValid( prop ) or not IsValid( prop:CPPIGetOwner() ) or prop:GetClass() ~= "prop_physics" then return false end
+    if not IsValid( prop ) then return false end
+    if not IsValid( prop:CPPIGetOwner() ) then return false end
+    if prop:GetClass() ~= "prop_physics" then return false end
     
     local shouldDestroy = hook.Run( "CFC_SWEP_ShapedCharge_CanDestroyQuery", self, prop )
     
