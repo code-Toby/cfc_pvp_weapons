@@ -25,7 +25,7 @@ function ENT:Draw()
     self.Text = string.format( "%02d", minutes ) .. ":" .. string.format( "%02d", seconds )
 
     cam.Start3D2D( TargetPos, fixAngles, 0.10 )
-        draw.SimpleText( self.Text, "Trebuchet24", 45, -30, Color(165, 0, 0, 255), 1, 1 )
+        draw.SimpleText( self.Text, "Trebuchet24", 45, -30, Color( 165, 0, 0, 255 ), 1, 1 )
     cam.End3D2D()
 end
 

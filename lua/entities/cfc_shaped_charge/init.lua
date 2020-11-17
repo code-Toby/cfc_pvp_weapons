@@ -124,7 +124,7 @@ function ENT:RunCountdownEffects()
         if not IsValid( self ) then return end
         
         self.bombLight:SetKeyValue( "brightness", 0 )
-    end)
+    end )
     
     self:EmitSound( "weapons/c4/c4_beep1.wav", 85, 100, 1, CHAN_STATIC )
     self:bombVisualsTimer()
@@ -137,7 +137,7 @@ function ENT:bombVisualsTimer()
     timer.Simple( timerDelay, function()
         if not IsValid( self ) then return end
         self:RunCountdownEffects() 
-    end)
+    end )
 end
 
 function ENT:CreateLight()
