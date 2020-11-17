@@ -30,7 +30,9 @@ function SWEP:PrimaryAttack()
     local isPlayer = trace.Entity:IsPlayer()
     local isNPC = trace.Entity:IsNPC()
     
-    if hitWorld or hasMaxCharges or isPlayer or isNPC then
+    local canPlace = hitWorld or hasMaxCharges or isPlayer or isNPC
+
+    if canPlace then
         self:GetOwner():EmitSound( "common/wpn_denyselect.wav", 100, 100, 1, CHAN_WEAPON )
         return
     end
