@@ -42,11 +42,11 @@ function SWEP:PrimaryAttack()
         bomb:SetPos( trace.HitPos )
         
         local fixAngles = trace.HitNormal:Angle()
-        local FixRotation = Vector( 270, 180, 0 )
+        local fixRotation = Vector( 270, 180, 0 )
 
-        fixAngles:rotateAroundAxis( fixAngles:Right(), FixRotation.x )
-        fixAngles:rotateAroundAxis( fixAngles:Up(), FixRotation.y )
-        fixAngles:rotateAroundAxis( fixAngles:Forward(), FixRotation.z )
+        fixAngles:RotateAroundAxis( fixAngles:Right(), fixRotation.x )
+        fixAngles:RotateAroundAxis( fixAngles:Up(), fixRotation.y )
+        fixAngles:RotateAroundAxis( fixAngles:Forward(), fixRotation.z )
         
         bomb:SetAngles( fixAngles )
         bomb.bombOwner = self:GetOwner()
