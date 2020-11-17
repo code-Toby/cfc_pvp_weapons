@@ -37,7 +37,7 @@ function ENT:Initialize()
 
     self:SetNWFloat( "bombInitiated", CurTime() )
 
-    spawnTime = CurTime()
+    self.spawnTime = CurTime()
     self:bombVisualsTimer()
 end
 
@@ -133,7 +133,7 @@ function ENT:RunCountdownEffects()
 end
 
 function ENT:bombVisualsTimer()
-    local timePassed = CurTime() - spawnTime
+    local timePassed = CurTime() - self.spawnTime
     local timerDelay = math.Clamp( self.bombTimer / timePassed - 1, 0.13, 1 )
     
     timer.Simple( timerDelay, function()
