@@ -1,22 +1,22 @@
-SWEP.Author			= "Redox"
-SWEP.Contact		= "CFC Discord"
-SWEP.Instructions	= "Right or left click to plant."
+SWEP.Author         = "Redox"
+SWEP.Contact        = "CFC Discord"
+SWEP.Instructions   = "Right or left click to plant."
 
 game.AddAmmoType( {
     name = "shapedCharge",
     dmgtype = DMG_BULLET
 } )
 
-SWEP.Spawnable      = true
+SWEP.Spawnable              = true
 
-SWEP.ViewModel      = "models/weapons/v_c4.mdl"
-SWEP.WorldModel     = "models/weapons/w_c4.mdl"
+SWEP.ViewModel              = "models/weapons/v_c4.mdl"
+SWEP.WorldModel             = "models/weapons/w_c4.mdl"
 
-SWEP.Primary.ClipSize		= 1
+SWEP.Primary.ClipSize       = 1
 SWEP.Primary.Delay          = 3
-SWEP.Primary.DefaultClip	= 1
-SWEP.Primary.Automatic		= false
-SWEP.Primary.Ammo		    = "shapedCharge"
+SWEP.Primary.DefaultClip    = 1
+SWEP.Primary.Automatic      = false
+SWEP.Primary.Ammo           = "shapedCharge"
 
 SWEP.Secondary.ClipSize     = -1
 SWEP.Secondary.DefaultClip  = -1
