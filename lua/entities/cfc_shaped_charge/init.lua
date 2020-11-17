@@ -44,7 +44,6 @@ end
 function ENT:OnTakeDamage ( dmg )
     self.bombHealth = self.bombHealth - dmg:GetDamage()
     if self.bombHealth <= 0 then
-
         if not IsValid( self ) then return end
 
         local effectdata = EffectData()
@@ -69,7 +68,6 @@ function ENT:OnTakeDamage ( dmg )
     
     self:EmitSound( "Plastic_Box.Break", 100, 100, 1, CHAN_WEAPON )
     self:EmitSound( "npc/roller/code2.wav", 100, 100, 1, CHAN_WEAPON )
-    
 end
 
 function ENT:OnRemove()
