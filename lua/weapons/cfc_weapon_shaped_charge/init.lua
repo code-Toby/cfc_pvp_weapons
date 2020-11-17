@@ -4,7 +4,6 @@ AddCSLuaFile( "shared.lua" )
 include( "shared.lua" )
 
 function SWEP:PrimaryAttack()
-
     self:SetNextPrimaryFire( CurTime() + self.Primary.Delay )
     
     if self:CanPrimaryAttack() == false then
@@ -15,15 +14,15 @@ function SWEP:PrimaryAttack()
             return
         end
         
-        self:GetOwner():SetAmmo( ammo-1, "shapedCharge" )
+        self:GetOwner():SetAmmo( ammo - 1, "shapedCharge" )
         self:SetClip1( 1 )
     end
     
     local viewTrace = {}
-	viewTrace.start = self:GetOwner():GetShootPos()
-	viewTrace.endpos = self:GetOwner():GetShootPos() + 100 * self:GetOwner():GetAimVector()
-	viewTrace.filter = {self:GetOwner()}
-	local trace = util.TraceLine( viewTrace )
+    viewTrace.start = self:GetOwner():GetShootPos()
+    viewTrace.endpos = self:GetOwner():GetShootPos() + 100 * self:GetOwner():GetAimVector()
+    viewTrace.filter = {self:GetOwner()}
+    local trace = util.TraceLine( viewTrace )
         
     local hitWorld = trace.HitNonWorld == false
     local maxCharges = GetConVar( "cfc_shaped_charge_maxcharges" ):GetInt()
@@ -38,7 +37,7 @@ function SWEP:PrimaryAttack()
     
     if trace.Entity:IsValid() then
         local bomb = ents.Create( "cfc_shaped_charge" )
-		bomb:SetPos( trace.HitPos )
+        bomb:SetPos( trace.HitPos )
         
         local FixAngles = trace.HitNormal:Angle()
         local FixRotation = Vector( 270, 180, 0 )
@@ -48,9 +47,9 @@ function SWEP:PrimaryAttack()
         FixAngles:RotateAroundAxis(FixAngles:Forward(), FixRotation.z)
         
         bomb:SetAngles( FixAngles )
-		bomb.bombOwner = self:GetOwner()
+        bomb.bombOwner = self:GetOwner()
         bomb:SetParent( trace.Entity )
-		bomb:Spawn()
+        bomb:Spawn()
         
         self:TakePrimaryAmmo( 1 )
     end
