@@ -3,9 +3,6 @@ AddCSLuaFile( "shared.lua" )
 
 include( "shared.lua" )
 
-local swingSound = "weapons/bat_draw_swoosh2.wav"
-local hitSound = "weapons/demo_charge_hit_world2.wav"
-
 function SWEP:PrimaryAttack()
     local ply = self:GetOwner()
 
@@ -23,7 +20,7 @@ function SWEP:PrimaryAttack()
         self:SendWeaponAnim( ACT_VM_HITCENTER );
 
         ply:SetAnimation( PLAYER_ATTACK1 );
-        ply:EmitSound( hitSound )
+        ply:EmitSound( self.hitSound )
 
         if ent:IsPlayer() || ent:IsNPC() then
             ent:SetVelocity( ply:EyeAngles():Forward() * 450 )
@@ -39,12 +36,12 @@ function SWEP:PrimaryAttack()
         self:SendWeaponAnim( ACT_VM_HITCENTER );
 
         ply:SetAnimation( PLAYER_ATTACK1 );
-        ply:EmitSound( swingSound )
-    elseif not IsValid( ent ) && ent:IsWorld() then
+        self:EmitSound( self.swingSound )
+    elseif ent:IsWorld() then
         self:SendWeaponAnim( ACT_VM_HITCENTER );
 
         ply:SetAnimation( PLAYER_ATTACK1 );
-        ply:EmitSound( hitSound )
+        self:EmitSound( self.hitSound )
 
         ply:SetVelocity( ply:EyeAngles():Forward() * -250 )
     end
