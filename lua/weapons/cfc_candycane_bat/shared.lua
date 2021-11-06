@@ -2,12 +2,13 @@ SWEP.Author         = "{Toby}"
 SWEP.Contact        = "CFC Discord"
 SWEP.Instructions   = "left click to smak people with the candycane"
 
-
 SWEP.HoldType               = "melee2"
 SWEP.Spawnable              = true
 
-SWEP.ViewModel              = "models/weapons/v_crowbar.mdl"
-SWEP.WorldModel             = "models/weapons/w_crowbar.mdl"
+SWEP.HoldType = "melee2"
+SWEP.UseHands = false
+SWEP.ViewModel = "models/weapons/v_crowbar.mdl"
+SWEP.WorldModel = "models/weapons/w_crowbar.mdl"
 
 SWEP.swingSound = "weapons/bat_draw_swoosh2.wav"
 SWEP.hitSound = "weapons/demo_charge_hit_world2.wav"
