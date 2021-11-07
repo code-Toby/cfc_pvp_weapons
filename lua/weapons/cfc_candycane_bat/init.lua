@@ -33,7 +33,7 @@ function SWEP:PrimaryAttack()
 
         ent:TakeDamage(20, ply, self)
     elseif not IsValid( ent ) && not ent:IsWorld() then
-        self:SendWeaponAnim( ACT_VM_HITCENTER );
+        self:SendWeaponAnim( ACT_VM_MISSCENTER );
 
         ply:SetAnimation( PLAYER_ATTACK1 );
         self:EmitSound( self.swingSound )
